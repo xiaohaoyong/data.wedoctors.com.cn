@@ -2,7 +2,7 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'site-title' => 'X计划管理后台',
+    'site-title' => '服务监督管理平台',
 
     'hx_url' => 'https://a1.easemob.com/1176170313115487/wedoctors/',
     'hx_id' =>'YXA6OyQn8AfAEee4Ca3vJQJwMA',

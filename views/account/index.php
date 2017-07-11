@@ -7,11 +7,8 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\doctor\AccountSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '管理列表';
+$this->title = '帮扶费用明细';
 $this->params['breadcrumbs'][] = $this->title;
-\app\components\helper\HeaderActionHelper::$action=[
-0=>['name'=>'添加','url'=>['create']]
-];
 ?>
 <div class="account-index">
 

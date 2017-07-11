@@ -5135,7 +5135,10 @@ Dashboard Stats
   clear: both;
 }
 .portlet .dashboard-stat:last-child {
-  margin-bottom: 0;
+  margin-bottom: 25px;
+}
+.site-index .dashboard-stat:last-child {
+
 }
 .dashboard-stat .visual {
   width: 80px;

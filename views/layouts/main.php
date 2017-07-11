@@ -11,7 +11,18 @@ use app\assets\AppAsset;
 use app\models\rbac\AuthMenu;
 
 AppAsset::register($this);
+$moduleId = \Yii::$app->controller->module->id === \Yii::$app->id ? '' : \Yii::$app->controller->module->id . '/';
+$controllerId = \Yii::$app->controller->id . '/';
+$actionId = \Yii::$app->controller->action->id;
+$permissionName = $moduleId . $controllerId . $actionId;
+$menu=[
+    1=>['icon-home','首页','/','site/index'],
+    2=>['fa fa-list','帮扶费用明细','/account/index','account/index'],
+    3=>['fa fa-list','医生列表','/users/index','users/index'],
+    4=>['fa fa-list','医院列表','/hospital/index','hospital/index'],
+    5=>['fa fa-list','课程','/classes/index','classes/index'],
 
+];
 ?>
 <?php $this->beginPage() ?><!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -90,27 +101,16 @@ AppAsset::register($this);
                     <!-- BEGIN SIDEBAR MENU -->
                     <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="margin-top:25px;">
                         <?php
-                        $authMenu = new AuthMenu();
-                        foreach ($authMenu->getMenusAll(1) as $menu): ?>
-                            <li class="start ">
-                                <a href="javascript:;">
-                                    <i class="<?=$menu['icon']?>"></i>
-                                    <span class="title"><?= $menu['description'] ?></span>
-                                    <span class="arrow "></span>
-                                </a>
-                                <?php if (!empty($menu['list2'])): ?>
-                                    <ul class="sub-menu">
-                                        <?php foreach ($menu['list2'] as $submenu): ?>
-                                            <li>
-                                                <a href="<?=\Yii::$app->urlManager->createUrl([$submenu['name']])?>">
-                                                    <i class="<?=$submenu['icon']?>"></i>
-                                                    <?=$submenu['description']?></a>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                <?php endif ?>
-                            </li>
-                        <?php endforeach; ?>
+                        foreach($menu as $k=>$v){
+                        ?>
+                        <li i<?php if($permissionName==$v[3]){?>  class="start active open"<?php }?>>
+                            <a href="<?=$v[2]?>">
+                                <i class="<?=$v[0]?>"></i>
+                                <span class="title"><?=$v[1]?></span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <?php }?>
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>

@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'metronic/plugins/font-awesome/css/font-awesome.min.css',
         'metronic/plugins/simple-line-icons/simple-line-icons.min.css',
-        'metronic/css/components.css',
+        'metronic/css/components.css?t=123',
         'metronic/plugins/bootstrap/css/bootstrap.min.css',
         'metronic/plugins/uniform/css/uniform.default.css',
         'metronic/plugins/bootstrap-switch/css/bootstrap-switch.min.css',
