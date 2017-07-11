@@ -58,13 +58,6 @@ $this->title = '用户列表';
                 }
             ],
             [
-                'attribute' => 'level',
-                'value' => function($data)
-                {
-                    return \app\models\Users::$levelText[$data->level];
-                }
-            ],
-            [
                 'attribute' => 'type',
                 'value' => function($data)
                 {

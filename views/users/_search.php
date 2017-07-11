@@ -19,9 +19,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id') ?>
     <?= $form->field($model, 'phone')?>
 
-    <?= $form->field($model, 'level')->dropDownList(\app\models\Users::$levelText, ['prompt'=>'请选择']) ?>
-    <?= $form->field($model, 'type')->dropDownList(\app\models\Users::$typeText, ['prompt'=>'请选择']) ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
