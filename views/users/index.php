@@ -8,9 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '用户列表';
-\app\components\helper\HeaderActionHelper::$action=[
-    0=>['name'=>'添加','url'=>['create']]
-];
+
 ?>
 <div class="users-index">
 
@@ -78,18 +76,7 @@ $this->title = '用户列表';
                 'format' => ['date', 'php:Y-m-d']
             ],
 
-            [
-                'class' => 'app\components\grid\ActionColumn',
-                'template'=>'
-                <div class="btn-group dropup">
-                    <a class="btn btn-circle btn-default btn-sm" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                        <i class="icon-settings"></i> 操作 <i class="fa fa-angle-up"></i></a>
-                    <ul class="dropdown-menu pull-right" role="menu">
-                        <li>{update} </li><li>{delete}</li>
-                    </ul>
-                </div>
-                ',
-            ],
+
         ],
     ]); ?>
 </div>
