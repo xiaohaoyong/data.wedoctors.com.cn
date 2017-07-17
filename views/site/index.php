@@ -15,7 +15,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        1349 / 6万
+                        <?=$money?> / 6万
                     </div>
                     <div class="desc">
                         帮扶费用总数
@@ -33,7 +33,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        1023
+                        <?=$zhuanjia?>
                     </div>
                     <div class="desc">
                         帮扶专家成员数
@@ -52,7 +52,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        549
+                        <?=$hosptail?>
                     </div>
                     <div class="desc">
                         帮扶医院数
@@ -70,7 +70,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        89
+                        <?=$doctor?>
                     </div>
                     <div class="desc">
                         帮扶医生数
@@ -88,7 +88,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        +89%
+                        <?=$canyu?>%
                     </div>
                     <div class="desc">
                         参与课程数
@@ -106,7 +106,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        +89%
+                        <?=$done?>%
                     </div>
                     <div class="desc">
                         课程完成率
@@ -124,7 +124,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        +89%
+                        <?=$hudong?>%
                     </div>
                     <div class="desc">
                         课程互动率
