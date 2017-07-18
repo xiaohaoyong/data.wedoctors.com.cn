@@ -11,7 +11,7 @@ var Index = function () {
                 });
             });
         },
-        initCharts: function () {
+        initCharts: function (visitors) {
 
             if (!jQuery.plot) {
                 return;
@@ -54,17 +54,6 @@ var Index = function () {
                 return (Math.floor(Math.random() * (1 + 50 - 20))) + 10;
             }
 
-            var visitors = [
-                ['02/2013', 1500],
-                ['03/2013', 2500],
-                ['04/2013', 1700],
-                ['05/2013', 800],
-                ['06/2013', 1500],
-                ['07/2013', 2350],
-                ['08/2013', 1500],
-                ['09/2013', 1300],
-                ['10/2013', 4600]
-            ];
 
 
             if ($('#site_statistics').size() != 0) {
@@ -138,7 +127,7 @@ var Index = function () {
                             var x = item.datapoint[0].toFixed(2),
                                 y = item.datapoint[1].toFixed(2);
 
-                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' visits');
+                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' 人');
                         }
                     } else {
                         $("#tooltip").remove();

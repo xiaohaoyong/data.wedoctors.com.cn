@@ -21,7 +21,7 @@ $this->title = '首页';
                         帮扶费用总数
                     </div>
                 </div>
-                <a class="more" href="javascript:;">
+                <a class="more" href="<?=\yii\helpers\Url::to(['account/index'])?>">
                     详情 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -40,7 +40,7 @@ $this->title = '首页';
 
                     </div>
                 </div>
-                <a class="more" href="javascript:;">
+                <a class="more" href="<?=\yii\helpers\Url::to(['users/index'])?>">
                     详情 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -58,7 +58,7 @@ $this->title = '首页';
                         帮扶医院数
                     </div>
                 </div>
-                <a class="more" href="javascript:;">
+                <a class="more" href="<?=\yii\helpers\Url::to(['hospital/index'])?>">
                     详情 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -76,7 +76,7 @@ $this->title = '首页';
                         帮扶医生数
                     </div>
                 </div>
-                <a class="more" href="javascript:;">
+                <a class="more" href="<?=\yii\helpers\Url::to(['users/index'])?>">
                     明细 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -94,7 +94,7 @@ $this->title = '首页';
                         参与课程数
                     </div>
                 </div>
-                <a class="more" href="javascript:;">
+                <a class="more" href="<?=\yii\helpers\Url::to(['classes/index'])?>">
                     明细 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -112,7 +112,7 @@ $this->title = '首页';
                         课程完成率
                     </div>
                 </div>
-                <a class="more" href="javascript:;">
+                <a class="more" href="<?=\yii\helpers\Url::to(['classes/index'])?>">
                     明细 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -130,7 +130,7 @@ $this->title = '首页';
                         课程互动率
                     </div>
                 </div>
-                <a class="more" href="javascript:;">
+                <a class="more" href="<?=\yii\helpers\Url::to(['classes/index'])?>">
                     明细 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -167,9 +167,15 @@ $this->title = '首页';
     </div>
 </div>
 <?php
+foreach($login as $k=>$v)
+{
+    $visitors.="\n['".$k."',$v],";
+}
+
 $jsform="
+var visitors = [$visitors];
 Index.init();
-Index.initCharts(); // init index page's custom scripts
+Index.initCharts(visitors); // init index page's custom scripts
 
 ";
 $js[]=$jsform;

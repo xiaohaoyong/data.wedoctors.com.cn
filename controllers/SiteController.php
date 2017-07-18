@@ -64,6 +64,16 @@ class SiteController extends BaseController {
         $lesson=Lesson::find()->where(['<','datetime',$time])->count();
         $aqiandao=ClassLesson::find()->select([])->where(['state'=>1])->groupBy('userid')->having(['>','count(*)',$lesson])->count();
         $done=round($aqiandao/$user,2)*100;
+
+        $redis=\Yii::$app->rdmp;
+        for($i=1;$i<8;$i++){
+
+            $date = date('Ymd', strtotime("- $i day"));
+            $login[$date]=$redis->hlen('yimai:log:' . $date);
+        }
+
+
+
         return $this->render('index',[
             'money'=>intval($account),
             'zhuanjia'=>$zhuanjia,
@@ -72,6 +82,7 @@ class SiteController extends BaseController {
             'hudong'=>$hudong,
             'canyu'=>$canyu,
             'done'=>$done,
+            'login'=>$login,
         ]);
     }
 
