@@ -44,7 +44,7 @@ class SiteController extends BaseController {
     public function actionIndex() {
 
         $account=Account::find()->sum('money');
-        $zhuanjia=Users::find()->where(['type'=>4])->count();
+        $zhuanjia=Users::find()->where(['type'=>[4,3]])->count();
         $hosptail=Helping::find()->where(['totype'=>2])->groupBy('toid')->count();
         $doctor=Helping::find()->where(['totype'=>1])->groupBy('toid')->count();
 

@@ -40,7 +40,7 @@ $this->title = '首页';
 
                     </div>
                 </div>
-                <a class="more" href="<?=\yii\helpers\Url::to(['users/index'])?>">
+                <a class="more" href="<?=\yii\helpers\Url::to(['users/index','user'=>1])?>">
                     详情 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>

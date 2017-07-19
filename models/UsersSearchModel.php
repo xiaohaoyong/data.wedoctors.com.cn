@@ -69,6 +69,10 @@ class UsersSearchModel extends Users
             $query->andFilterWhere([UserInfo::tableName().'.phone' => $this->phone]);
         }
         $query->andFilterWhere(['!=','type',0]);
+        if(\Yii::$app->request->get('user')==1)
+        {
+            $query->andFilterWhere(['type'=>[4,3]]);
+        }
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
