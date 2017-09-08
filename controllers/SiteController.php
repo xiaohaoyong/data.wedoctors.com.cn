@@ -2,6 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\classes\ClassLesson;
+use app\models\classes\Lesson;
+use app\models\doctor\Account;
+use app\models\dynamic\DyComment;
+use app\models\dynamic\DyPraise;
+use app\models\Helping;
+use app\models\User;
+use app\models\Users;
 use Yii;
 use yii\bootstrap\ActiveForm;
 use yii\filters\AccessControl;
@@ -34,7 +42,48 @@ class SiteController extends BaseController {
      * @return string
      */
     public function actionIndex() {
-        return $this->render('index');
+
+        $account=Account::find()->sum('money');
+        $zhuanjia=Users::find()->where(['type'=>[4,3]])->count();
+        $hosptail=Helping::find()->where(['totype'=>2])->groupBy('toid')->count();
+        $doctor=Helping::find()->where(['totype'=>1])->groupBy('toid')->count();
+
+        $comment=DyComment::find()->groupBy('userid')->count();
+        $praise= DyPraise::find()->groupBy('userid')->count();
+
+        $user=Users::find()->where(["!=",'type',0])->count();
+        $hudong=round(($comment+$praise)/$user,2)*100;
+
+        //签到总数
+        $qiandao=ClassLesson::find()->where(['state'=>1])->groupBy('userid')->count();
+
+        $canyu=round($qiandao/$user,2)*100;
+
+        $time=time();
+        //已公布课程数
+        $lesson=Lesson::find()->where(['<','datetime',$time])->count();
+        $aqiandao=ClassLesson::find()->select([])->where(['state'=>1])->groupBy('userid')->having(['>','count(*)',$lesson])->count();
+        $done=round($aqiandao/$user,2)*100;
+
+        $redis=\Yii::$app->rdmp;
+        for($i=1;$i<8;$i++){
+
+            $date = date('Ymd', strtotime("- $i day"));
+            $login[$date]=$redis->hlen('yimai:log:' . $date);
+        }
+
+
+
+        return $this->render('index',[
+            'money'=>intval($account),
+            'zhuanjia'=>$zhuanjia,
+            'hosptail'=>$hosptail,
+            'doctor'=>$doctor,
+            'hudong'=>$hudong,
+            'canyu'=>$canyu,
+            'done'=>$done,
+            'login'=>$login,
+        ]);
     }
 
     /**
