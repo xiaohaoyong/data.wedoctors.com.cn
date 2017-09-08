@@ -16,7 +16,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\rbac\AuthAdminuser',
+            'identityClass' => 'app\models\user',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [

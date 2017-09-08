@@ -1,104 +1,68 @@
 <?php
 
 namespace app\models;
+use yii\db\ActiveRecord;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
-
     /**
-     * @inheritdoc
+     * @return \yii\db\Connection the database connection used by this AR class.
      */
+    public static function getDb()
+    {
+        return \Yii::$app->get('dbud');
+    }
+
+    public static function tableName()
+    {
+        return 'data_user';
+    }
+
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return static::findOne($id);
     }
 
-    /**
-     * @inheritdoc
-     */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return static::findOne(['accessToken' => $token]);
     }
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
     public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+    {     //①
+        return static::findOne(['username' => $username]);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
+    public function getAuthkey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->auth_key === $authKey;
+    }
+
+    public function validatePassword($password)
+    {          //②
+        return $this->password === md5(md5("data.wedoctors").$password);
     }
 
     /**
-     * Validates password
      *
-     * @param string $password password to validate
-     * @return boolean if password provided is valid for current user
-     */
-    public function validatePassword($password)
+     * <span style="white-space:pre">    </span> * Generates "remember me" authentication key
+     * <span style="white-space:pre">    </span> */
+    public function generateAuthKey()                    //③
     {
-        return $this->password === $password;
+        $this->auth_key = \Yii::$app->security->generateRandomString();
+        $this->save();
     }
 }
+
+?>
+

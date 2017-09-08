@@ -63,7 +63,7 @@ $error = !empty($error) ? $error : '';
 			<span><?= $error ?></span>
         </div>
     <?php }?>
-        <?= $form->field($model,'userlogin',['template' => "\n{label}\n<div class=\"input-icon\">\n<i class=\"fa fa-user\"></i>\n{input}\n</div>\n"])->textInput()->label('用户名:') ?>
+        <?= $form->field($model,'username',['template' => "\n{label}\n<div class=\"input-icon\">\n<i class=\"fa fa-user\"></i>\n{input}\n</div>\n"])->textInput()->label('用户名:') ?>
         <?= $form->field($model,'password',['template' => "\n{label}\n<div class=\"input-icon\">\n<i class=\"fa fa-lock\"></i>\n{input}\n</div>\n"])->passwordInput()->label('密码:') ?>
         <div class="form-actions">
             <?= \yii\helpers\Html::activeCheckbox($model,'rememberMe',['label' => '记住我']) ?>

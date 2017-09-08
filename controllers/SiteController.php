@@ -7,7 +7,7 @@ use yii\bootstrap\ActiveForm;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\rbac\LoginForm;
+use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\web\Response;
 
@@ -44,30 +44,17 @@ class SiteController extends BaseController {
      */
     public function actionLogin()
     {
-        if(!Yii::$app->user->isGuest)
-        {
+        if (!\Yii::$app->user->isGuest) {     //①
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        
-        if (!\Yii::$app->request->isPost) {
-            return $this->renderPartial('login', ['model' => $model]);
+        $model = new LoginForm();             //②
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {      //③
+            return $this->goBack();          //④
         }
-
-        $model->load(\Yii::$app->request->post());
-        if(\Yii::$app->request->isPost && \Yii::$app->request->isAjax)
-        {
-            \Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
-
-        if ($model->login()) {
-            return $this->goHome();
-        }else{
-            \Yii::$app->getSession()->setFlash('error', '用户名或密码错误');
-            return $this->redirect(Yii::$app->request->referrer);
-        }
+        return $this->renderPartial('login', [      //⑤
+            'model' => $model,
+        ]);
     }
 
     /**
