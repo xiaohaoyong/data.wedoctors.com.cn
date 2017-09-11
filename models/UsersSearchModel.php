@@ -51,7 +51,7 @@ class UsersSearchModel extends Users
 
         $this->load($params);
 
-        $query->orderBy('id desc');
+        $query->orderBy(Users::tableName().'.id desc');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails

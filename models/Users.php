@@ -55,6 +55,22 @@ class Users extends UserDb
             [['level', 'type', 'createtime', 'state'], 'integer'],
         ];
     }
+    public static function find()
+    {
+        $user=Yii::$app->user->identity;
+        if($user->type!=1){
+
+            if($user->type==2){
+                return parent::find()->joinWith('info')->andFilterWhere([UserInfo::tableName().".hospitalid"=>22706]);
+
+            }
+            if($user->type==3){
+                return parent::find()->joinWith('info')->andFilterWhere([UserInfo::tableName().".hospitalid"=>$user->hospital]);
+            }
+        }
+
+        return parent::find();
+    }
 
     /**
      * @inheritdoc

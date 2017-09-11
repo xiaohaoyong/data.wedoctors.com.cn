@@ -45,6 +45,37 @@ class Classes extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function find()
+    {
+        $user=Yii::$app->user->identity;
+        if($user->type!=1){
+
+            if($user->type==2){
+                return parent::find()->joinWith('info')->andFilterWhere([UserInfo::tableName().".hospitalid"=>22706]);
+
+            }
+            if($user->type==3){
+                if($user->province)
+                {
+                    $where["provinceid"]=$user->province;
+                }
+                if($user->city)
+                {
+                    $where["cityid"]=$user->city;
+                }
+                if($user->county)
+                {
+                    $where["countyid"]=$user->county;
+                }
+
+                return parent::find()->andFilterWhere($where);
+            }
+        }
+
+        return parent::find();
+    }
+
+
     /**
      * @inheritdoc
      */

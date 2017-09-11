@@ -3,6 +3,22 @@
 namespace app\models;
 use yii\db\ActiveRecord;
 
+/**
+ * Class User
+ *
+ *
+ * @property integer $id
+ * @property string $username
+ * @property string $password
+ * @property integer $type
+ * @property integer $hospital
+ * @property integer $province
+ * @property integer $county
+ * @property integer $city
+ * @property integer $careatetime
+ * @property integer $lasttime
+ * @package app\models
+ */
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     /**

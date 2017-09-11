@@ -2,6 +2,7 @@
 
 namespace app\models\doctor;
 
+use app\models\UserInfo;
 use Yii;
 
 /**
@@ -42,6 +43,7 @@ class Account extends \yii\db\ActiveRecord
         return Yii::$app->get('dbus');
     }
 
+
     /**
      * @inheritdoc
      */
@@ -55,6 +57,27 @@ class Account extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getInfo()
+    {
+        return $this->hasOne(UserInfo::className(),['userid' => 'id']);
+    }
+
+    public static function find()
+    {
+        $user=Yii::$app->user->identity;
+        if($user->type!=1){
+
+            if($user->type==2){
+                return parent::find()->joinWith('info')->andFilterWhere([UserInfo::tableName().".hospitalid"=>22706]);
+
+            }
+            if($user->type==3){
+                return parent::find()->joinWith('info')->andFilterWhere([UserInfo::tableName().".hospitalid"=>$user->hospital]);
+            }
+        }
+
+        return parent::find();
+    }
     /**
      * @inheritdoc
      */
@@ -70,6 +93,7 @@ class Account extends \yii\db\ActiveRecord
             'source' => '来源',
         ];
     }
+
     public function beforeSave($insert)
     {
         if($insert)
