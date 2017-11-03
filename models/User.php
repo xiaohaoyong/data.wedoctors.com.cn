@@ -19,6 +19,8 @@ use yii\db\ActiveRecord;
  * @property integer $lasttime
  * @package app\models
  */
+
+
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     /**

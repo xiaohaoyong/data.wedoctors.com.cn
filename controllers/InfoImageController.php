@@ -87,7 +87,6 @@ class InfoImageController extends Controller
     public function actionDelete($id)
     {
         $rest=$this->findModel($id)->delete();
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         if($rest){
             return ['img'=>true];
         }else{
