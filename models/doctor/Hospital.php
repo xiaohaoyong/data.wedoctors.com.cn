@@ -2,6 +2,8 @@
 
 namespace app\models\doctor;
 
+use app\models\UserInfo;
+use app\models\Users;
 use Yii;
 
 /**
@@ -66,18 +68,19 @@ class Hospital extends \yii\db\ActiveRecord
     public static function find()
     {
         $user=Yii::$app->user->identity;
+        $hospital=parent::find();
         if($user->type!=1){
 
             if($user->type==2){
-                return parent::find()->joinWith('info')->andFilterWhere([UserInfo::tableName().".hospitalid"=>22706]);
+                $hospital->joinWith('info')->andFilterWhere([UserInfo::tableName().".hospitalid"=>22706]);
 
             }
             if($user->type==3){
-                return parent::find()->andFilterWhere(["id"=>$user->hospital]);
+                $hospital->andFilterWhere(["id"=>$user->hospital]);
             }
         }
-
-        return parent::find();
+        $hospital->andFilterWhere(['in','id',UserInfo::find()->select('hospitalid')->groupBy('hospitalid')->column()]);
+        return $hospital;
     }
     /**
      * @inheritdoc

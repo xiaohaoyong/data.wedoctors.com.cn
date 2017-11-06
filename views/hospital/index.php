@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\doctor\HospitalSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Hospitals';
+$this->title = '医院列表';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

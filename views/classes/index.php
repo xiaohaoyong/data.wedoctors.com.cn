@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\classes\ClassesSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '管理列表';
+$this->title = '课程表';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -53,6 +53,15 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'createtime',
                 'format' => ['date', 'php:Y-m-d H:i:s']
+            ],
+            [
+                'class' => 'app\components\grid\ActionColumn',
+                'template'=>'{view}',
+                'buttons'=>[
+                    'view'=>function($url,$model,$key){
+                        return Html::a('详情',\yii\helpers\Url::to(['lesson/index','LessonSearchModel[classesid]'=>$model->id]));
+                    },
+                ],
             ],
 
         ],

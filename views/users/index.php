@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UsersSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '用户列表';
+$this->title = '医生列表';
 
 ?>
 <div class="users-index">
