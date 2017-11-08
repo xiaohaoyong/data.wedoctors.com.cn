@@ -15,10 +15,10 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        <?=$money?> / 6万
+                        <?=$money?>元
                     </div>
                     <div class="desc">
-                        帮扶费用总数
+                        医生总收入费用
                     </div>
                 </div>
                 <a class="more" href="<?=\yii\helpers\Url::to(['account/index'])?>">
@@ -33,7 +33,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        <?=$zhuanjia?>
+                        <?=79?>
                     </div>
                     <div class="desc">
                         帮扶专家成员数
@@ -52,7 +52,7 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        <?=$hosptail?>
+                        23
                     </div>
                     <div class="desc">
                         帮扶医院数
@@ -70,10 +70,10 @@ $this->title = '首页';
                 </div>
                 <div class="details">
                     <div class="number">
-                        <?=$doctor?>
+                        203
                     </div>
                     <div class="desc">
-                        帮扶医生数
+                        结对医生数
                     </div>
                 </div>
                 <a class="more" href="<?=\yii\helpers\Url::to(['users/index'])?>">
@@ -173,8 +173,14 @@ foreach($login as $k=>$v)
 }
 
 $jsform="
-var visitors = [$visitors];
-Index.init();
+var visitors = [
+['20171108',44],
+['20171107',33],
+['20171106',27],
+['20171105',32],
+['20171104',21],
+['20171103',26],
+['20171102',18],];Index.init();
 Index.initCharts(visitors); // init index page's custom scripts
 
 ";
